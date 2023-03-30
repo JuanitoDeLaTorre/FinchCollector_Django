@@ -72,3 +72,24 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.image-container{
+    margin: 7px 7px 7px 7px;
+    box-shadow: 0px 0px 5px grey;
+    position: relative;
+    display: inline-block;
+}
+
+#deleteButton{
+    position: absolute;
+    right:0;
+    top:0;
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Camera, Photo, Gear
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .forms import PhotoForm, GearForm
 
 
@@ -31,12 +32,12 @@ def detail(request, id):
 
 class CreateCamera(CreateView):
     model = Camera
-    fields = "__all__"
+    fields = ["name", "price", "resolution", "image"]
 
 
 class UpdateCamera(UpdateView):
     model = Camera
-    fields = "__all__"
+    fields = ["name", "price", "resolution", "image"]
 
 
 class DeleteCamera(DeleteView):
@@ -56,15 +57,30 @@ def add_photo(request, cam_id):
     return redirect("detail", id=cam_id)
 
 
-def list_gear(request):
-    return render(request, "create_gear.html")
+class PhotoDelete(DeleteView):
+    model = Photo
+    success_url = "/"
 
 
-def create_gear(request):
-    form = GearForm()
-    return render(request, "create_gear.html", {"form": form})
+# def list_gear(request):
+#     all_gear = Gear.objects.filter()
+#     return render(request, "list_gear.html", {"gear": all_gear})
+
+
+# def create_gear(request):
+#     if request.method == "POST":
+#         new_gear = GearForm(request.POST)
+#         print(new_gear)
+#         new_gear.save()
+#         return redirect("list_gear")
+#     form = GearForm()
+#     return render(request, "create_gear.html", {"form": form})
 
 
 class CreateGear(CreateView):
     model = Gear
     fields = "__all__"
+
+
+class ListGear(ListView):
+    model = Gear

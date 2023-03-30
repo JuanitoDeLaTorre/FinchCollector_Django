@@ -1,9 +1,17 @@
 from django.db import models
 from django.urls import reverse
-import datetime
+from datetime import datetime
 
 
 # Create your models here.
+
+
+class Gear(models.Model):
+    name = models.CharField(max_length=100, default="")
+    price = models.IntegerField(default=100)
+
+    def get_absolute_url(self):
+        return reverse("list_gear")
 
 
 class Camera(models.Model):
@@ -11,6 +19,7 @@ class Camera(models.Model):
     price = models.IntegerField(default=1000)
     resolution = models.CharField(max_length=100, default="20MP")
     image = models.CharField(max_length=100, default="")
+    gear = models.ManyToManyField(Gear)
 
     def __str__(self):
         return self.name
@@ -27,8 +36,3 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Gear(models.Model):
-    name = models.CharField(max_length=100, default="")
-    price = models.IntegerField(default=100)

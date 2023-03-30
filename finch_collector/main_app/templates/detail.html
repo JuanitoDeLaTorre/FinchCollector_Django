@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <h4>Camera name: {{camera.name}}</h4>
+        <h2>Camera name: {{camera.name}}</h2>
         <ul >
             <li>Camera resolution: {{camera.resolution}}</li>
             <li>Camera price: ${{camera.price}}</li>
         </ul>
         <a href="{% url 'camera_update' camera.id %}"><button>EDIT</button></a>
         <a href="{% url 'camera_delete' camera.id %}"><button>DELETE</button></a>
-        <!-- <a href="{% url 'photo_add' camera.id %}"><button>ADD PHOTO</button></a> -->
-
+        <hr>
+        <h3>Add Photo!</h3>
         <form action="{% url 'photo_add' camera.id %}" method="POST">
             {% csrf_token %}
             {{photo_form.as_p}}
@@ -17,7 +17,10 @@
         </form>
 
         {% for pic in photos %}
-        <img style = "height: 300px; width: 300px; object-fit: cover" src="{{pic.url}}" alt="">
+        <div class="image-container">
+            <img style = "height: 300px; width: 300px; object-fit: cover" src="{{pic.url}}" alt="">
+            <a href="{% url 'delete_photo' pic.id %}"><div id="deleteButton">X</div></a>
+        </div>
         {% endfor %}
         
 
