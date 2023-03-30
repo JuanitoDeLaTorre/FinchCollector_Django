@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cardHolder">
+    {% for camera in cameras %}
+    <a href="{% url 'detail' camera.id %}">
+    <div class="card">
+        <img id = "cardImage" src="{{camera.image}}" alt="">
+        <h4>{{camera.name}}</h4>
+        <ul>
+            <li>{{camera.resolution}}</li>
+            <li>${{camera.price}}</li>
+        </ul>
+    </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

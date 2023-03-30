@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <h4>Camera name: {{camera.name}}</h4>
+        <ul >
+            <li>Camera resolution: {{camera.resolution}}</li>
+            <li>Camera price: ${{camera.price}}</li>
+        </ul>
+        <a href="{% url 'camera_update' camera.id %}"><button>EDIT</button></a>
+        <a href="{% url 'camera_delete' camera.id %}"><button>DELETE</button></a>
+        <!-- <a href="{% url 'photo_add' camera.id %}"><button>ADD PHOTO</button></a> -->
+
+        <form action="{% url 'photo_add' camera.id %}" method="POST">
+            {% csrf_token %}
+            {{photo_form.as_p}}
+            <input type="submit" value = "Submit New Photo">
+        </form>
+        
+
+
+{% endblock %}
