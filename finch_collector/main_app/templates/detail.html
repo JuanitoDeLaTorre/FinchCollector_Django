@@ -15,6 +15,10 @@
             {{photo_form.as_p}}
             <input type="submit" value = "Submit New Photo">
         </form>
+
+        {% for pic in photos %}
+        <img style = "height: 300px; width: 300px; object-fit: cover" src="{{pic.url}}" alt="">
+        {% endfor %}
         
 
 

@@ -27,3 +27,8 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Gear(models.Model):
+    name = models.CharField(max_length=100, default="")
+    price = models.IntegerField(default=100)

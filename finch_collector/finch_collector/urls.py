@@ -27,4 +27,6 @@ urlpatterns = [
     path("camera/update/<int:pk>", views.UpdateCamera.as_view(), name="camera_update"),
     path("camera/delete/<int:pk>", views.DeleteCamera.as_view(), name="camera_delete"),
     path("photo/add/<int:cam_id>", views.add_photo, name="photo_add"),
+    path("gear/", views.list_gear, name="list_gear"),
+    path("gear/new", views.create_gear, name="gear_create"),
 ]

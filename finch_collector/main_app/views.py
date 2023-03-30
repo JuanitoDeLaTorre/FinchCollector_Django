@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Camera, Photo
+from .models import Camera, Photo, Gear
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import PhotoForm
+from .forms import PhotoForm, GearForm
 
 
 # Create your views here.
@@ -54,3 +54,17 @@ def add_photo(request, cam_id):
         new_photo.save()
 
     return redirect("detail", id=cam_id)
+
+
+def list_gear(request):
+    return render(request, "create_gear.html")
+
+
+def create_gear(request):
+    form = GearForm()
+    return render(request, "create_gear.html", {"form": form})
+
+
+class CreateGear(CreateView):
+    model = Gear
+    fields = "__all__"
