@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Camera name: {{camera.name}}</h2>
+<h1>{{camera.name}}</h1>
 <ul>
-    <li>Camera resolution: {{camera.resolution}}</li>
-    <li>Camera price: ${{camera.price}}</li>
+    <li>📸 Camera resolution: {{camera.resolution}} </li>
+    <li>🤑 Camera price: ${{camera.price}} </li>
 </ul>
 <a href="{% url 'camera_update' camera.id %}"><button>EDIT</button></a>
 <a href="{% url 'camera_delete' camera.id %}"><button>DELETE</button></a>

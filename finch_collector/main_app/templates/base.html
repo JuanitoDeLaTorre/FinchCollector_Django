@@ -2,28 +2,41 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type = "text/css" href="{% static 'css/style2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
 
 </head>
+
 <body>
     <header>
         <h3>CAMERAS, BABY</h3>
         <ul>
-            <li><a href = "/about">About</a></li>
-            <li><a href = "{% url 'camera_create' %}">New Cam</a></li>
-            <li><a href = "{% url 'gear_create' %}">Add Gear</a></li>
-            <li><a href = "{% url 'list_gear' %}">List Gear</a></li>
-            <li><a href = "/">All Cameras</a></li>
+            <a href="/about">
+                <li>About</li>
+            </a>
+            <a href="{% url 'camera_create' %}">
+                <li>New Cam</li>
+            </a>
+            <a href="{% url 'gear_create' %}">
+                <li>Add Gear</li>
+            </a>
+            <a href="{% url 'list_gear' %}">
+                <li>List Gear</li>
+            </a>
+            <a href="/">
+                <li>All Cameras</li>
+            </a>
         </ul>
     </header>
     <div class="mainContent">
-       {% block content %}
-       {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
 </body>
+
 </html>
