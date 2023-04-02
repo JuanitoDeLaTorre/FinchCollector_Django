@@ -19,14 +19,24 @@ def about(request):
 
 
 def detail(request, id):
+    # gear = Gear.objects.filter()
     photos = Photo.objects.filter(camera_id=id)
     camera = Camera.objects.get(id=id)
     photo_form = PhotoForm()
 
+    # .values_list("id")
+    id_list = camera.gear.all()
+    excluded_gear = Gear.objects.exclude(id__in=id_list)
+
     return render(
         request,
         "detail.html",
-        {"camera": camera, "photo_form": photo_form, "photos": photos},
+        {
+            "camera": camera,
+            "photo_form": photo_form,
+            "photos": photos,
+            "gear": excluded_gear,
+        },
     )
 
 
@@ -84,3 +94,14 @@ class CreateGear(CreateView):
 
 class ListGear(ListView):
     model = Gear
+    fields = "__all__"
+
+
+def assoc_gear(request, cam_id, gear_id):
+    Camera.objects.get(id=cam_id).gear.add(gear_id)
+    return redirect("detail", id=cam_id)
+
+
+def unassoc_gear(request, cam_id, gear_id):
+    Camera.objects.get(id=cam_id).gear.remove(gear_id)
+    return redirect("detail", id=cam_id)

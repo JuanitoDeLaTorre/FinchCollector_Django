@@ -93,3 +93,9 @@ a {
     display: flex;
     align-items: center;
 }
+
+.bottomRow {
+    display: flex;
+    margin-left: 30%;
+    gap: 100px;
+}

@@ -4,12 +4,6 @@
 <form action="{% url 'gear_create' %}" method = "POST">
     {%csrf_token%}
     {{form.as_p}}
-    <!-- <label for="name">Name</label>
-    <input type="text" name = "name">
-
-    <label for="price">Price</label>
-    <input type="text" name = "price">
- -->
     <input type="submit" value = "submit new gear">
 
 </form>

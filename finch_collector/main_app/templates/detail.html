@@ -1,28 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <h2>Camera name: {{camera.name}}</h2>
-        <ul >
-            <li>Camera resolution: {{camera.resolution}}</li>
-            <li>Camera price: ${{camera.price}}</li>
-        </ul>
-        <a href="{% url 'camera_update' camera.id %}"><button>EDIT</button></a>
-        <a href="{% url 'camera_delete' camera.id %}"><button>DELETE</button></a>
-        <hr>
-        <h3>Add Photo!</h3>
-        <form action="{% url 'photo_add' camera.id %}" method="POST">
-            {% csrf_token %}
-            {{photo_form.as_p}}
-            <input type="submit" value = "Submit New Photo">
-        </form>
+<h2>Camera name: {{camera.name}}</h2>
+<ul>
+    <li>Camera resolution: {{camera.resolution}}</li>
+    <li>Camera price: ${{camera.price}}</li>
+</ul>
+<a href="{% url 'camera_update' camera.id %}"><button>EDIT</button></a>
+<a href="{% url 'camera_delete' camera.id %}"><button>DELETE</button></a>
+<hr>
+<h3>Add Photo!</h3>
+<form action="{% url 'photo_add' camera.id %}" method="POST">
+    {% csrf_token %}
+    {{photo_form.as_p}}
+    <input type="submit" value="Submit New Photo">
+</form>
 
-        {% for pic in photos %}
-        <div class="image-container">
-            <img style = "height: 300px; width: 300px; object-fit: cover" src="{{pic.url}}" alt="">
-            <a href="{% url 'delete_photo' pic.id %}"><div id="deleteButton">X</div></a>
-        </div>
+{% for pic in photos %}
+<div class="image-container">
+    <img style="height: 300px; width: 300px; object-fit: cover" src="{{pic.url}}" alt="">
+    <a href="{% url 'delete_photo' pic.id %}">
+        <div id="deleteButton">X</div>
+    </a>
+</div>
+{% endfor %}
+<hr>
+<div class="bottomRow">
+    <div>
+        <h3>Available Gear!</h3>
+        <ul>
+            {% for item in gear %}
+            <li>{{item.name}}</li>
+            <form action="{% url 'assoc_gear' camera.id item.id %}">
+                {% csrf_token %}
+                <button type="submit">Add to Camera</button>
+            </form>
+
+            {% endfor %}
+    </div>
+    <div>
+        <h3>Your Gear!</h3>
+        {% for item in camera.gear.all %}
+        <li>{{item.name}}</li>
+        <form action="{% url 'unassoc_gear' camera.id item.id %}">
+            {% csrf_token %}
+            <button type="submit">Remove from Camera</button>
+        </form>
         {% endfor %}
-        
+    </div>
+
+</div>
+
+</ul>
+
 
 
 {% endblock %}

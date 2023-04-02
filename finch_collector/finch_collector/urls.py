@@ -30,4 +30,14 @@ urlpatterns = [
     path("photo/delete/<int:pk>", views.PhotoDelete.as_view(), name="delete_photo"),
     path("gear/", views.ListGear.as_view(), name="list_gear"),
     path("gear/new", views.CreateGear.as_view(), name="gear_create"),
+    path(
+        "camera/<int:cam_id>/assoc_gear/<int:gear_id>/",
+        views.assoc_gear,
+        name="assoc_gear",
+    ),
+    path(
+        "camera/<int:cam_id>/unassoc_gear/<int:gear_id>/",
+        views.unassoc_gear,
+        name="unassoc_gear",
+    ),
 ]
